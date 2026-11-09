@@ -16,30 +16,30 @@ PAGES = [
     ("local.html", "Local businesses"),
 ]
 
-LOGO = """<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#0057B8"/>
-<circle cx="20" cy="19" r="8" fill="#F7C548"/><path d="M0 24c5-3 9-3 13 0s9 3 13 0 10-3 14 0v16H0z" fill="#3DD6C4"/>
-<path d="M0 30c5-3 9-3 13 0s9 3 13 0 10-3 14 0v10H0z" fill="#FF5A3C"/></svg>"""
+LOGO = """<svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="lc"><circle cx="20" cy="20" r="18"/></clipPath></defs>
+<circle cx="20" cy="20" r="19.5" fill="#2B1055"/><g clip-path="url(#lc)"><rect width="40" height="40" fill="#FFD23F"/><rect y="17" width="40" height="23" fill="#FF8A3D"/><rect y="24" width="40" height="16" fill="#FF2E88"/>
+<rect y="15" width="40" height="2" fill="#2B1055"/><rect y="21" width="40" height="2.5" fill="#2B1055"/><rect y="27" width="40" height="3" fill="#2B1055"/><rect y="32" width="40" height="8" fill="#00C2C7"/></g></svg>"""
 
 def scene(variant=0, label="Illustrated sunset over Tralee Bay"):
     skies = [
-        ("#F7C548", "#FF5A3C", "#F28AB8", "#0057B8"),
-        ("#BFEFFF", "#7FD3F0", "#3DA9E8", "#0057B8"),
+        ("#FFD23F", "#FF2E88", "#FF8A3D", "#5B2A86"),
+        ("#BFEFFF", "#7FD3F0", "#3DA9E8", "#5B2A86"),
         ("#FFD9A0", "#FF8A5C", "#C9518F", "#1B2F66"),
-        ("#E6FBF7", "#9BE8DC", "#3DD6C4", "#0B6E8A"),
+        ("#E6FBF7", "#9BE8DC", "#00C2C7", "#0B6E8A"),
     ]
     a, b, c, d = skies[variant % len(skies)]
     gid = f"sky{variant}"
     sun_y = [430, 170, 470, 210][variant % 4]
     return f"""<svg class="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="{html.escape(label)}">
 <defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{d}"/><stop offset=".45" stop-color="{c}"/><stop offset=".75" stop-color="{b}"/><stop offset="1" stop-color="{a}"/></linearGradient>
-<linearGradient id="sea{variant}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0057B8"/><stop offset="1" stop-color="#0B1F3A"/></linearGradient></defs>
+<linearGradient id="sea{variant}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B2A86"/><stop offset="1" stop-color="#2B1055"/></linearGradient></defs>
 <rect width="1600" height="620" fill="url(#{gid})"/>
 <g class="sun"><circle cx="1080" cy="{sun_y}" r="110" fill="#FFF3C4" opacity=".95"/></g>
 <path d="M0 560 L180 500 L320 520 L470 430 L600 470 L760 400 L900 455 L1040 520 L1600 540 L1600 620 L0 620Z" fill="#1B2F66" opacity=".55"/>
-<path d="M0 590 L240 560 L420 575 L620 540 L860 570 L1100 585 L1600 575 L1600 620 L0 620Z" fill="#0B1F3A" opacity=".7"/>
+<path d="M0 590 L240 560 L420 575 L620 540 L860 570 L1100 585 L1600 575 L1600 620 L0 620Z" fill="#2B1055" opacity=".7"/>
 <rect y="600" width="1600" height="300" fill="url(#sea{variant})"/>
 <g fill="#FFF3C4" opacity=".55"><rect x="1030" y="625" width="100" height="5" rx="2"/><rect x="1010" y="650" width="140" height="4" rx="2"/><rect x="1045" y="680" width="70" height="4" rx="2"/><rect x="990" y="715" width="180" height="3" rx="2"/></g>
-<path d="M0 780 C260 740 520 800 800 770 S1300 730 1600 760 L1600 900 L0 900Z" fill="#F7C548"/>
+<path d="M0 780 C260 740 520 800 800 770 S1300 730 1600 760 L1600 900 L0 900Z" fill="#FFD23F"/>
 <path d="M0 820 C300 790 600 840 900 815 S1350 790 1600 810 L1600 900 L0 900Z" fill="#FFE39A"/>
 <path d="M0 772 C260 732 520 792 800 762 S1300 722 1600 752" fill="none" stroke="#FFFFFF" stroke-width="6" opacity=".8"/>
 </svg>"""
@@ -58,7 +58,7 @@ def head(title, desc, current):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{html.escape(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Work+Sans:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,{LOGO.replace('#','%23').replace(chr(10),'').replace('"',"'")}">
 </head>
@@ -96,7 +96,9 @@ def hero(title, tag, variant=0, small=False, buttons="", img=None):
     else:
         media = scene(variant)
     return f"""<section class="hero{' small' if small else ''}"><div class="hero-media">{media}</div>
-<div class="wrap"><h1>{title}</h1><p class="tag">{tag}</p>{buttons}</div></section>"""
+<div class="vhs" aria-hidden="true"><span class="rec">&#9654; PLAY</span><span class="stamp">SP&nbsp;&nbsp;JUL 26 1994</span></div>
+<div class="wrap"><h1 class="retro" data-text="{html.escape(html.unescape(title).replace(chr(173),''))}">{title}</h1><p class="tag">{tag}</p>{buttons}</div>
+{'' if small else '<div class="sticker" aria-hidden="true"><span>Greetings from</span><strong>Kerry!</strong></div>'}</section>"""
 
 def write(fname, body, title, desc):
     with open(os.path.join(ROOT, fname), "w", encoding="utf-8") as f:
@@ -124,11 +126,11 @@ home += f"""
 </div>
 <div class="route" style="background:var(--ink);color:var(--sand)">
 <h3 style="font-size:2rem">Named Ireland's No. 1 beach</h3>
-<p style="color:#B9C6DA">Ballyheigue Beach topped the Irish list in the Condé Nast Traveller Readers' Choice Awards 2026. Locals weren't surprised.</p>
+<p style="color:#E7D8FF">Ballyheigue Beach topped the Irish list in the Condé Nast Traveller Readers' Choice Awards 2026. Locals weren't surprised.</p>
 <a class="btn btn-coral" href="gallery.html">See it from the air</a>
 </div>
 </div></section>
-{WAVE_DOWN('#FFF6E4', '#0057B8')}
+{WAVE_DOWN('#FFF3D6', '#5B2A86')}
 <section class="band-atlantic"><div class="wrap">
 <h2>Plan your days</h2>
 <p class="lede">Four ways into Ballyheigue, whatever the weather is doing.</p>
@@ -173,7 +175,7 @@ explore += f"""<section><div class="wrap">
 <p class="lede">Whether you're here for an afternoon or a week, start with these. Have a favourite we've missed? Tell us on Instagram.</p>
 <ol class="gems">{items}</ol>
 </div></section>
-{WAVE_DOWN('#FFF6E4', '#0B1F3A')}
+{WAVE_DOWN('#FFF3D6', '#2B1055')}
 <section class="band-ink"><div class="wrap split">
 <div><h2>Rainy day?</h2><p class="lede">It's Kerry. Have a plan B.</p>
 <p>Head for the amusements, warm up in the sauna, settle into a pub or drive 20 minutes to Tralee for the Kerry County Museum and the leisure centres. Banna Leisure Centre, a couple of miles down the road, has an indoor pool.</p></div>
@@ -209,7 +211,7 @@ waw += f"""<section><div class="wrap split" style="align-items:start">
 </div>
 <div class="route"><h3 style="font-size:1.8rem">Along the coast</h3><p style="color:var(--muted)">Approximate distances from Ballyheigue.</p><ol class="stops">{st}</ol></div>
 </div></section>
-{WAVE_DOWN('#FFF6E4', '#FF5A3C')}
+{WAVE_DOWN('#FFF3D6', '#FF2E88')}
 <section style="background:var(--coral);color:var(--paper)"><div class="wrap">
 <h2>Good to know</h2>
 <div class="postcards" style="margin-top:24px">
@@ -268,13 +270,13 @@ write("gallery.html", gal, "Gallery and drone footage | Discover Ballyheigue",
 
 # ---------------- LOCAL ----------------
 groups = [
-    ("drink", "Pubs and bars", "#FF5A3C", [
+    ("drink", "Pubs and bars", "#FF2E88", [
         ("Flahive's", "The village", "Lively village pub, highly rated on Google and Tripadvisor for its atmosphere, music and friendly staff.", None, "Flahive's Ballyheigue"),
         ("O'Regan's Bar", "Main Street", "Long-established bar with a restaurant and function room. Great music nights and a sunny-day favourite after the beach.", None, "O'Regan's Bar Ballyheigue"),
         ("Kirby's Lounge", "The village", "Bar and restaurant known for good food, good beer and a friendly welcome.", None, "Kirby's Lounge Ballyheigue"),
         ("White Sands Hotel bar", "Main Street", "Hotel bar opposite the beach, with evening entertainment in summer.", "https://www.whitesands.ie", "White Sands Hotel Ballyheigue"),
     ]),
-    ("eat", "Cafés and food", "#F7C548", [
+    ("eat", "Cafés and food", "#FFD23F", [
         ("Tides Café", "Main Street", "Seaside café for breakfast, brunch, lunch, speciality coffee and homemade treats. Dog friendly and top-rated on Tripadvisor.", None, "Tides Cafe Ballyheigue"),
         ("The Peachy Bean", "Main Street", "Coffee shop for an early cup and a bite before the beach.", None, "The Peachy Bean Ballyheigue"),
         ("The Krusty Krub", "Main Street", "Family-friendly spot for casual food, open late.", None, "The Krusty Krub Ballyheigue"),
@@ -283,7 +285,7 @@ groups = [
         ("Tony's Ice Cream Van", "The seafront", "A familiar sight on the front. No trip to Ballyheigue is complete without a cone.", None, "Ballyheigue Beach"),
         ("Centra Ballyheigue", "Main Street", "Shop and deli for coffee, ice cream, hot food and beach supplies.", None, "Centra Ballyheigue"),
     ]),
-    ("do", "Attractions and activities", "#3DD6C4", [
+    ("do", "Attractions and activities", "#00C2C7", [
         ("Ballyheigue Beach", "Buncurrig", "Blue Flag beach with parking, toilets, a playground and lifeguards in season. Walk the 5km out to Black Rock and back.", "https://www.discoverireland.ie/kerry/ballyheigue-beach", "Ballyheigue Beach"),
         ("Ballyheigue Castle Golf Club", "Castle grounds", "Nine holes around the castle ruins, with views over the beach. Visitors welcome.", "https://www.ballyheiguecastlegolfclub.com", "Ballyheigue Castle Golf Club"),
         ("Healing Heat Sauna", "Ballyheigue Beach", "Seaside sauna sessions overlooking the beach, ideal after a sea swim.", None, "Healing Heat Sauna Ballyheigue"),
@@ -291,7 +293,7 @@ groups = [
         ("Roger Casement statue", "Above the beach", "A small green with a big view over the Blue Flag beach. Bring a coffee.", None, "Roger Casement Statue Ballyheigue"),
         ("Glenderry Souterrains", "Near the village", "Ancient underground passages a few miles out, for anyone curious about early Irish life.", None, "Glenderry Souterrains"),
     ]),
-    ("stay", "Places to stay", "#F28AB8", [
+    ("stay", "Places to stay", "#FF8A3D", [
         ("White Sands Hotel", "Main Street", "Family-run three-star hotel a minute's walk from the beach, with family rooms and a restaurant.", "https://www.whitesands.ie", "White Sands Hotel Ballyheigue"),
         ("O'Neill's B&B", "The village", "Highly rated B&B close to the beach and village.", None, "O'Neill's B&B Ballyheigue"),
         ("Bayview Glamping", "Ballyheigue", "Five-star-reviewed glamping with a view of the bay.", "https://bayviewglamping.com/", "Bayview Glamping Ballyheigue"),
@@ -317,7 +319,7 @@ local += f"""<section><div class="wrap">
 {gh}
 <div class="route" style="margin-top:64px;background:var(--atlantic);color:var(--paper)">
 <h3 style="font-size:1.8rem">Run a business in Ballyheigue?</h3>
-<p style="color:#D6E6FF">Get your pub, café, shop, accommodation or activity listed here. Send us a message on Instagram with your details.</p>
+<p style="color:#F1E6FF">Get your pub, café, shop, accommodation or activity listed here. Send us a message on Instagram with your details.</p>
 <a class="btn btn-coral" href="https://www.instagram.com/discoverballyheigue/" rel="noopener" target="_blank">Message us on Instagram</a>
 </div>
 </div></section>
