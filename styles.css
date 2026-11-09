@@ -60,6 +60,7 @@ p{margin:0 0 1em;max-width:66ch}
 .hero-media video,.hero img.scene{filter:saturate(1.25) brightness(1.05)}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(circle at 88% 8%,rgba(255,236,170,.75),rgba(255,199,44,.25) 18%,transparent 42%),
+             linear-gradient(90deg,rgba(10,46,77,.55) 0%,rgba(10,46,77,.2) 45%,transparent 70%),
              linear-gradient(180deg,transparent 30%,rgba(255,111,165,.18) 55%,rgba(10,46,77,.72) 100%)}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:70px;z-index:2;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C240 0 480 70 720 36 S1200 0 1440 34 V70 H0Z' fill='%23FFFBF0'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
